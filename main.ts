@@ -1,6 +1,9 @@
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
+    statusbar = statusbars.create(20, 4, StatusBarKind.Health)
+    statusbar.attachToSprite(mySprite)
+})
+let statusbar: StatusBarSprite = null
 let mySprite: Sprite = null
-let statusbar = statusbars.create(20, 4, StatusBarKind.Health)
-statusbar.attachToSprite(mySprite)
 tiles.setCurrentTilemap(tilemap`legel1`)
 mySprite = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
@@ -22,3 +25,6 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
+if (!(mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`))) {
+    sprites.destroy(statusbar)
+}
